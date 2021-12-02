@@ -8,4 +8,12 @@
         <option value="Aloha">Aloha</option>
     </select>
     {{ implode(', ', $greeting) }} {{ $name }} @if($loud) ! @endif
+
+    <form action="#" wire:submit.prevent="resetName">
+        <button>Reset Name</button>
+    </form>
+
+    <form action="#" wire:submit.prevent="$set('name', 'Bingo')">
+        <button>Dynamic Reset Name</button>
+    </form>
 </div>
