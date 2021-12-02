@@ -7,6 +7,7 @@
         <option value="Adios">Adios</option>
         <option value="Aloha">Aloha</option>
     </select>
+
     {{ implode(', ', $greeting) }} {{ $name }} @if($loud) ! @endif
 
     <form action="#" wire:submit.prevent="resetName">
