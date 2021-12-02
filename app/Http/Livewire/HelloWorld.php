@@ -2,38 +2,23 @@
 
 namespace App\Http\Livewire;
 
-use Illuminate\Http\Request;
+use App\Models\Contact;
 use Livewire\Component;
 
 class HelloWorld extends Component
 {
-    public $name = 'World';
-    public $loud = false;
-    public $greeting = ['Hello'];
+    public $names = ['Jelly', 'Man', 'Chico'];
+    public $contacts;
 
-    public function mount(Request $request, $name)
+    public function mount()
     {
-        $this->name = $request->input('name', $name); // This will set the name property to the value of the name query parameter.
-        // $this->name = $name; // This will override the defined value of name above when component is mounted.
+        $this->contacts = Contact::all();
     }
 
-    public function hydrate()
+    public function removeContact(Contact $contact)
     {
-        // Runs when component is re-rendered.
-        $this->name = 'Hydrated!';
-    }
-
-    public function updated($field)
-    {
-        // Runs when a property is updated.
-        if ($field === 'name') {
-            $this->name = strtoupper($this->name);
-        }
-    }
-
-    public function resetName()
-    {
-        $this->name = 'Livewire';
+        $contact->delete();
+        $this->contacts = Contact::all();
     }
 
     public function render()

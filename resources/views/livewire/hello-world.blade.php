@@ -1,20 +1,12 @@
 <div>
-    <input type="text" wire:model="name">
-    <input type="checkbox" wire:model="loud">
-    <select wire:model="greeting" multiple>
-        <option value="Hello">Hello</option>
-        <option value="Goodbye">Goodbye</option>
-        <option value="Adios">Adios</option>
-        <option value="Aloha">Aloha</option>
-    </select>
+    @foreach($contacts as $contact)
+        <p>
+            @livewire('say-hi', ['contact' => $contact], key($contact->id))
+            <button wire:click="removeContact({{ $contact->id }})">Remove</button>
+        </p>
+    @endforeach
 
-    {{ implode(', ', $greeting) }} {{ $name }} @if($loud) ! @endif
+    <hr>
 
-    <form action="#" wire:submit.prevent="resetName">
-        <button>Reset Name</button>
-    </form>
-
-    <form action="#" wire:submit.prevent="$set('name', 'Bingo')">
-        <button>Dynamic Reset Name</button>
-    </form>
+    <button wire:click="$refresh">Refresh</button> {{ now() }}
 </div>
