@@ -8,9 +8,7 @@
     @livewireStyles
 </head>
 <body>
-    @livewire('hello-world', [
-        'name' => 'John Doe'
-    ])
+    Hello World!
 
     @livewireScripts
 </body>
