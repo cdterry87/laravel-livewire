@@ -7,8 +7,9 @@ use Livewire\Component;
 
 class HelloWorld extends Component
 {
-    public $names = ['Jelly', 'Man', 'Chico'];
     public $contacts;
+
+    protected $listeners = ['foo' => '$refresh'];
 
     public function mount()
     {
@@ -19,6 +20,12 @@ class HelloWorld extends Component
     {
         $contact->delete();
         $this->contacts = Contact::all();
+    }
+
+    // This method is  not needed if $emit('refreshChildren') is used in blade template
+    public function refreshChildren()
+    {
+        $this->emit('refreshChildren', 'foo'); // You can pass a variable as the second argument
     }
 
     public function render()
